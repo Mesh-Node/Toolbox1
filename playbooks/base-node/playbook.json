@@ -1,0 +1,16 @@
+{
+  "id": "base-node",
+  "title": "Stand up a base node",
+  "description": "Install the toolbox, open the notebook, and prove three working tools: hop packet, word search, local disc.",
+  "time": 45,
+  "difficulty": "intermediate",
+  "memory": "small",
+  "disk": "about 1 GB if the operator places the simple disc and the search index",
+  "model": "none",
+  "tier": "base",
+  "published": true,
+  "tags": ["bootstrap", "obsidian", "hop-80", "search", "wikipedia"],
+  "requires": ["Mesh-Node/mesh-node said Stop"],
+  "operator_input": "go before package install, and go before placing the two data files",
+  "success": "vault links; exact-word miss then hit; hop slogan exits 6; search prints WORD and MEANING; zim titles start with Photosynthesis"
+}

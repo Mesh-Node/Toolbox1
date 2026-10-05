@@ -1,0 +1,40 @@
+#!/bin/sh
+# Prove the base toolbox. Prints one line per check.
+# Usage: detect-base [NOTEBOOK]
+set -eu
+
+root=$(CDPATH= cd -- "$(dirname "$0")/.." && pwd)
+note=${1:-$root/notebook}
+book=$(mktemp)
+trap 'rm -f "$book"' EXIT
+
+fail=0
+
+if [ -f "$note/Index.md" ] && grep -q '\[\[exact-word\]\]' "$note/Index.md" && grep -q '\[\[seed\]\]' "$note/Index.md"; then
+  echo "STEP vault PASS Index links exact-word and seed"
+else
+  echo "STEP vault FAIL Index missing or links missing"
+  fail=1
+fi
+
+printf '%s\n' 'going to crash' 'a compiler' 'a honey bee' > "$book"
+
+if "$root/scripts/exact-word" "$book" going to chrash >/dev/null 2>&1; then
+  echo "STEP exact-word FAIL typo was a hit"
+  fail=1
+else
+  echo "STEP exact-word PASS typo exited non-zero"
+fi
+
+hit=$("$root/scripts/exact-word" "$book" going to crash || true)
+case "$hit" in
+  *'going to crash'*) echo "STEP exact-word PASS real words printed the line" ;;
+  *) echo "STEP exact-word FAIL real words missed"; fail=1 ;;
+esac
+
+if [ "$fail" -ne 0 ]; then
+  echo "STOP FAIL"
+  exit 1
+fi
+echo "STOP PASS"
+exit 0

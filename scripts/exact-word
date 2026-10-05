@@ -1,0 +1,12 @@
+#!/bin/sh
+# exact-word BOOK WORDS...
+# Hit: print matching lines, exit 0. Miss: print nothing, exit 1.
+set -eu
+book=$1
+shift
+[ -f "$book" ] || { echo "no book" >&2; exit 2; }
+q=$(printf '%s' "$*")
+if grep -F -n -e "$q" "$book"; then
+  exit 0
+fi
+exit 1

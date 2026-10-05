@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exact word lookup</title>
+<style>
+:root {
+  --bg: #0b0d10; --fg: #d8d2c4; --dim: #8a8376; --line: #2a2e34;
+  --accent: #c45c26; --ok: #7ea36b; --bad: #b54a4a; --card: #14181e;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg);
+  font: 16px/1.5 "Segoe UI", system-ui, sans-serif; }
+.shell { display: grid; grid-template-columns: 240px 1fr; min-height: 100%; }
+nav { border-right: 1px solid var(--line); padding: 22px 14px 40px; }
+nav h1 { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent);
+  font-weight: 650; margin: 0 0 18px; }
+nav button { display: block; width: 100%; text-align: left; background: transparent; border: 0;
+  color: var(--dim); padding: 9px 10px; font: 13px/1.35 inherit; cursor: pointer; }
+nav button:hover, nav button:focus { color: var(--fg); outline: none; background: #1a1f26; }
+nav button.on { color: var(--fg); background: #1a1f26; box-shadow: inset 2px 0 0 var(--accent); }
+.stage { padding: 28px 36px 72px; max-width: 920px; }
+.kicker { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 8px; }
+h2 { font-size: 26px; font-weight: 650; margin: 0 0 12px; letter-spacing: -0.02em; }
+.lede { color: var(--dim); max-width: 64ch; margin: 0 0 22px; }
+.ask { background: var(--card); border: 1px solid var(--line); padding: 14px 16px; margin: 0 0 18px; }
+.ask strong { color: var(--accent); font-weight: 650; }
+.mono { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--ok); }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { border-bottom: 1px solid var(--line); text-align: left; padding: 7px 8px; vertical-align: top; }
+th { color: var(--dim); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; font-weight: 500; }
+.out { color: var(--bad); }
+.mch { color: var(--ok); }
+.foot { margin-top: 28px; color: var(--dim); font-size: 13px; }
+kbd { font-family: ui-monospace, monospace; font-size: 11px; border: 1px solid var(--line); padding: 1px 5px; color: var(--fg); }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button.next { margin-top: 20px; background: var(--accent); color: #1a1008; border: 0; padding: 10px 16px;
+  font: 650 14px inherit; cursor: pointer; }
+@media (max-width: 820px) { .shell { grid-template-columns: 1fr; } nav { border-right: 0; border-bottom: 1px solid var(--line); } }
+</style>
+</head>
+<body>
+<div class="shell">
+<nav>
+  <h1>Exact word lookup</h1>
+  <div id="toc"></div>
+  <p class="foot"><kbd>j</kbd> / <kbd>k</kbd> next · prev</p>
+  <p class="foot"><a href="INDEX.html">Kit lessons</a></p>
+</nav>
+<main class="stage" id="stage">
+  <p class="lede">Loading lessons…</p>
+</main>
+</div>
+<script>
+(function () {
+  var LESSONS = [
+    { id: "rule", title: "Hit or miss", kicker: "Exact words",
+      lede: "This lookup does not guess what you meant. It looks for the words you typed. A match is a hit. Anything else is a miss. There is no closeness score.",
+      ask: "If you type the same words into the same copy of the book, what should you get?",
+      html: "<p class=\"lede\">The same titles. Every time. A one-letter change is a different search, not a nearby one. That is the point of this tool: it is repeatable.</p><p class=\"lede\">No fingerprint. No “how similar.” Either the words are on the page, or they are not.</p>" },
+
+    { id: "miss", title: "A miss is empty", kicker: "Real run",
+      lede: "A packed English encyclopedia on disk. Same book for every row below.",
+      ask: "Why did “going to chrash” find nothing?",
+      html: "<table><thead><tr><th>What you typed</th><th>What came back</th></tr></thead><tbody><tr><td class=\"mono\">going to chrash</td><td class=\"out\">nothing — miss</td></tr><tr><td class=\"mono\">going to crash</td><td class=\"mch\">10 titles — hit</td></tr></tbody></table><p class=\"lede\">The misspelled word is not in those pages as written. The tool did not “almost” find crash. Empty is the correct answer.</p>" },
+
+    { id: "hit", title: "A shorter phrase is a new search", kicker: "Real run",
+      lede: "Dropping words is not a softer version of the same lookup. It is a different lookup.",
+      ask: "Did “economy crash” return the same 10 titles as the longer sentence?",
+      html: "<table><thead><tr><th>What you typed</th><th>What came back</th></tr></thead><tbody><tr><td class=\"mono\">going to crash</td><td>10 articles about stock-market crashes</td></tr><tr><td class=\"mono\">economy crash</td><td>a different 10 — a book, Dubai, Latvia. Only one title in common with the longer sentence.</td></tr></tbody></table><p class=\"lede\">From the shorter search, the first titles included <span class=\"mono\">How an Economy Grows and Why It Crashes</span>, a Dubai housing crash, and the 2008 Latvian financial crisis. Same book. New words. New list.</p>" },
+
+    { id: "detect", title: "When this is the wrong tool", kicker: "Detect",
+      lede: "Exact word lookup stops at hit or miss. It does not turn pages into a cloud of numbers. It does not rank “almost.”",
+      ask: "If a miss comes back with a similarity score, what happened?",
+      html: "<p class=\"lede\">You left this tool. Someone scored meaning. That is a different lesson (offline book lookup after a hit). Do not mix them.</p><p class=\"lede\">Detect: a typo that still returns pages means the tool guessed. Exact lookup does not guess. Detect: one fused number for “close enough” means stop. This lesson has no such number.</p>" }
+  ];
+
+  var toc = document.getElementById("toc");
+  var stage = document.getElementById("stage");
+  var i = Number(localStorage.getItem("kit-exact-lookup") || 0);
+  if (!(i >= 0 && i < LESSONS.length)) i = 0;
+
+  function render() {
+    localStorage.setItem("kit-exact-lookup", String(i));
+    var buttons = toc.querySelectorAll("button");
+    for (var n = 0; n < buttons.length; n++) buttons[n].classList.toggle("on", n === i);
+    var L = LESSONS[i];
+    stage.innerHTML = '<p class="kicker">' + L.kicker + " · " + (i + 1) + "/" + LESSONS.length + "</p>" +
+      "<h2>" + L.title + "</h2>" +
+      '<p class="lede">' + L.lede + "</p>" +
+      '<div class="ask"><strong>Pause here.</strong> ' + L.ask + "</div>" +
+      L.html +
+      '<button class="next" type="button">' + (i < LESSONS.length - 1 ? "Next lesson" : "Back to the start") + "</button>";
+    stage.querySelector(".next").onclick = function () { i = (i + 1) % LESSONS.length; render(); };
+  }
+
+  LESSONS.forEach(function (L, n) {
+    var b = document.createElement("button");
+    b.textContent = (n + 1) + ". " + L.title;
+    b.onclick = function () { i = n; render(); };
+    toc.appendChild(b);
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "j" || e.key === "ArrowRight") { i = Math.min(LESSONS.length - 1, i + 1); render(); }
+    if (e.key === "k" || e.key === "ArrowLeft") { i = Math.max(0, i - 1); render(); }
+  });
+  render();
+})();
+</script>
+</body>
+</html>

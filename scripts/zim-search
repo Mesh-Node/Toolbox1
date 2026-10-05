@@ -1,0 +1,9 @@
+#!/bin/sh
+# zim-search ZIM WORDS...
+# Titles from a local disc. Not the large English disc. Not the internet.
+set -eu
+zim=$1
+shift
+[ -f "$zim" ] || { echo "zim missing: $zim" >&2; exit 2; }
+command -v kiwix-search >/dev/null 2>&1 || { echo "kiwix-search missing" >&2; exit 2; }
+kiwix-search "$zim" "$*" | head -n 8

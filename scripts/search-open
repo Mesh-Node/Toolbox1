@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+"""Word list only. Do not fuse with a meaning score. Read-only."""
+import sqlite3
+import sys
+
+if len(sys.argv) < 3:
+    print("usage: search-open DB WORDS...", file=sys.stderr)
+    sys.exit(2)
+
+db = sys.argv[1]
+query = " ".join(sys.argv[2:])
+try:
+    con = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
+except sqlite3.Error as exc:
+    print(f"no index: {exc}", file=sys.stderr)
+    sys.exit(2)
+
+rows = con.execute(
+    """
+    SELECT p.path, p.start_line
+    FROM passages_fts AS f
+    JOIN passages AS p ON p.id = f.id
+    WHERE f.passages_fts MATCH ?
+    LIMIT 5
+    """,
+    (query,),
+).fetchall()
+
+print("WORD")
+if not rows:
+    print("empty")
+    print("MEANING")
+    print("not this step. Do not fuse. Do not ask the chat model.")
+    sys.exit(1)
+
+for path, line in rows:
+    print(f"{path}:{line}")
+print("MEANING")
+print("not this step. Do not fuse. Do not ask the chat model.")
+sys.exit(0)

@@ -1,0 +1,5 @@
+procedure-state.md
+book.txt
+data/*.zim
+data/*.sqlite
+data/*.sqlite-*

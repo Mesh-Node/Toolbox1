@@ -1,0 +1,15 @@
+{
+  "id": "exact-word",
+  "title": "Exact word lookup",
+  "description": "Look up the words you typed. A match is a hit. Anything else is a miss. No score.",
+  "time": 10,
+  "difficulty": "beginner",
+  "memory": "small",
+  "model": "none",
+  "tier": "base",
+  "published": true,
+  "tags": ["lookup", "exact-word"],
+  "requires": ["obsidian-toolbox pass"],
+  "operator_input": "none",
+  "success": "typo exits 1 with no line; real words print the line and exit 0"
+}
