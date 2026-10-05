@@ -1,6 +1,6 @@
 # Base toolbox
 
-A classroom machine follows the seed, then `playbooks/base-node`. The first step proves Omarchy. Omarchy is the OS layer on Arch, not a hostname. Reading that page does not install it. The operator says go.
+A classroom machine follows the seed, then `playbooks/base-node`. The node already has Omarchy and an agent in a harness. This toolbox is for that node. Reading the page does not install it. The operator says go.
 
 ## Already shared — seed
 

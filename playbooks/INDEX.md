@@ -6,7 +6,7 @@ Read this before you run anything. Reading a card does not install it. The opera
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | base-node | base | yes | small | none | 45 |
 
-`base-node` is the page. It opens the notebook, shows how to add a tool, and proves three working examples: hop packet, word search, local disc.
+`base-node` is the page. This toolbox is for Omarchy. The node already has Omarchy and an agent in a harness. The page opens the notebook and proves three tools.
 
 Pieces it calls, already in this folder:
 

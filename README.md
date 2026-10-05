@@ -1,6 +1,8 @@
 # Toolbox1 — starter toolbox
 
-A toolbox is notes on disk plus lessons. Copy this folder onto a host. The agent runs what is in here. You bring the model.
+This toolbox is for Omarchy.
+
+The new node already has Omarchy. It already has an agent in a harness. You bring the model. This folder is the toolbox.
 
 Local first. GitHub last. Nothing leaves this host until tested here.
 

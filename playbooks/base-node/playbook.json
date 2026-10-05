@@ -1,7 +1,7 @@
 {
   "id": "base-node",
   "title": "Stand up a base node",
-  "description": "Install the toolbox, open the notebook, and prove three working tools: hop packet, word search, local disc.",
+  "description": "For an Omarchy node that already has an agent in a harness. Open the notebook. Prove three tools.",
   "time": 45,
   "difficulty": "intermediate",
   "memory": "small",
@@ -10,7 +10,7 @@
   "tier": "base",
   "published": true,
   "tags": ["bootstrap", "omarchy", "obsidian", "hop-80", "search", "wikipedia"],
-  "requires": ["Mesh-Node/mesh-node said Stop", "Omarchy: /etc/os-release ID=omarchy"],
+  "requires": ["Omarchy already installed", "agent already running in a harness", "Mesh-Node/mesh-node said Stop"],
   "operator_input": "go before package install, and go before placing the two data files",
   "success": "vault links; exact-word miss then hit; hop slogan exits 6; search prints WORD and MEANING; zim titles start with Photosynthesis"
 }
