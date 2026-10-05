@@ -10,6 +10,7 @@ The notebook is the toolbox. A new tool is a note, a script, and a detect. The t
 
 ## What you'll learn
 
+- Confirm this host is Omarchy before you install. Omarchy is the OS layer. A hostname is not the proof.
 - Install only the packages this page names.
 - Open the notebook. The files are the pass. The app is optional.
 - Add a tool: note, script, detect, link.
@@ -21,13 +22,15 @@ The notebook is the toolbox. A new tool is a note, a script, and a detect. The t
 
 Already done: Mesh-Node/mesh-node said Stop.
 
-Packages, after go, on Arch:
+This page assumes Omarchy. Omarchy is a configuration layer on Arch Linux: Arch packages, Hyprland, and the `omarchy-*` commands. It is not a machine name. Prove that in step 1 before any install.
+
+Packages, after go, and only after step 1 passes:
 
 ```
 sudo pacman -S --needed obsidian kiwix-tools libzim jq sqlite python
 ```
 
-If the package manager is not pacman, stop. Report its name. Do not invent package names.
+If the detect in step 1 fails, stop. Do not invent package names for another OS.
 
 `hermes` on PATH, or stop and tell the operator. Do not pipe a remote install script.
 
@@ -70,7 +73,30 @@ A tool is not in the toolbox until Index links it and a detect has a pass and a 
 
 From the toolbox root. Stop on the first fail.
 
-### 1. Notebook
+### 1. Omarchy
+
+Purpose: the packages and the desktop tools on this page are native to Omarchy. Native means they use Arch's pacman, Omarchy's package set, and, when a tool talks to the screen, Hyprland. It does not mean every script is an `omarchy` subcommand.
+
+Omarchy is a configuration layer on Arch Linux. The proof is the OS id. A hostname that says omarchy is not the proof.
+
+Location: any directory. This step writes nothing.
+
+```
+. /etc/os-release
+printf '%s %s %s\n' "$ID" "$ID_LIKE" "$VERSION_ID"
+omarchy-version
+omarchy-version-channel
+```
+
+Check: the first line starts with `omarchy` and includes `arch`. `omarchy-version` prints a version. The channel is `stable`, `rc`, `edge`, or `dev`.
+
+On one Omarchy host this printed `omarchy arch 4.0.0`, version `4.0.0-1`, channel `stable`. That stamp is not the MSI. Record what this host prints.
+
+Failure: `$ID` is not `omarchy`, or `omarchy-version` is missing. Stop. Report the id. Do not continue to package install.
+
+The hop packet script does not need Hyprland. A script that closes a window does. That script is not in this download. Search and the disc use Arch packages. They are not `omarchy` subcommands.
+
+### 2. Notebook
 
 ```
 chmod +x scripts/bootstrap-vault scripts/exact-word scripts/hop-scope scripts/search-open scripts/zim-search
@@ -79,7 +105,7 @@ chmod +x scripts/bootstrap-vault scripts/exact-word scripts/hop-scope scripts/se
 
 Open `notebook/Index.md`. It links seed and exact-word. If Obsidian is installed, open this folder as a vault. If not, read the markdown.
 
-### 2. How to create a tool
+### 3. How to create a tool
 
 Exact word lookup is the pattern. Same words, same file, same lines. A typo is a miss.
 
@@ -97,7 +123,7 @@ To add another tool, do only this:
 4. Link `[[<name>]]` from `notebook/Index.md`.
 5. If the detect fails, delete the script and write it again from the note. Do not add a score to force a pass.
 
-### 3. Hop-80
+### 4. Hop-80
 
 Unbounded context means the old session is not shrunk into a paragraph. The packet is short. Files stay on disk.
 
@@ -131,7 +157,7 @@ rg -n '_fire_cutover_at_threshold'
 
 Zero hits means the automatic fire is absent. Say so. The packet tool still works. Do not invent a setting.
 
-### 4. Search, then open
+### 5. Search, then open
 
 Place the index at `data/knowledge.sqlite` only after the operator names the door. Do not look in another home.
 
@@ -141,7 +167,7 @@ Place the index at `data/knowledge.sqlite` only after the operator names the doo
 
 WORD is the list. MEANING is not this step. Do not average them. Do not ask the chat model to look it up. Do not unload the chat model. Do not run an embed model on a small host.
 
-### 5. Local disc
+### 6. Local disc
 
 Place the simple disc at `data/simple.zim` only after the operator names the door. About 1 GB. Not the 50 GB English file.
 
@@ -152,6 +178,14 @@ Place the simple disc at `data/simple.zim` only after the operator names the doo
 Titles are the working proof. If a later server lists `search_leads`, you started the fat server. Stop.
 
 ## Expected output
+
+Omarchy, on this host. The MSI must print its own line. Do not copy this stamp.
+
+```
+omarchy arch 4.0.0
+4.0.0-1
+stable
+```
 
 Notebook:
 

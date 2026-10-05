@@ -9,8 +9,8 @@
   "model": "none",
   "tier": "base",
   "published": true,
-  "tags": ["bootstrap", "obsidian", "hop-80", "search", "wikipedia"],
-  "requires": ["Mesh-Node/mesh-node said Stop"],
+  "tags": ["bootstrap", "omarchy", "obsidian", "hop-80", "search", "wikipedia"],
+  "requires": ["Mesh-Node/mesh-node said Stop", "Omarchy: /etc/os-release ID=omarchy"],
   "operator_input": "go before package install, and go before placing the two data files",
   "success": "vault links; exact-word miss then hit; hop slogan exits 6; search prints WORD and MEANING; zim titles start with Photosynthesis"
 }
