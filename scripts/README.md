@@ -1,17 +1,7 @@
 # Scripts
 
-Step one:
+A promoted tool names a script in this folder.
 
-```
-./scripts/ready
-```
+Nothing is promoted yet. Do not add a script that tells an Omarchy user they are on Omarchy.
 
-Pass:
-
-```
-PASS omarchy
-PASS harness
-STOP PASS
-```
-
-Later tools get a script in this folder and a playbook next to playbooks/01-ready.md. No HTML.
+See the workflow note in the vault root.
