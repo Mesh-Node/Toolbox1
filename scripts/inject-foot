@@ -1,0 +1,19 @@
+#!/bin/sh
+# Put text into one open foot. Does not spawn. Does not close.
+# Usage: inject-foot ADDRESS TEXT
+set -eu
+addr=${1:-}
+if [ $# -gt 0 ]; then
+  shift
+fi
+text=$(printf '%s' "$*")
+[ -n "$addr" ] && [ -n "$text" ] || {
+  echo "usage: inject-foot ADDRESS TEXT" >&2
+  exit 2
+}
+window="address:$addr"
+hyprctl dispatch "hl.dsp.focus({ window = \"$window\" })"
+printf '%s' "$text" | wl-copy
+wtype -M ctrl -M shift v -m shift -m ctrl
+wtype -k Return
+echo "PASS inject $addr"

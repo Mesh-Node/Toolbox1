@@ -1,0 +1,7 @@
+#!/bin/sh
+# Launch an empty foot. No packet. Origin stays.
+# Usage: bare-foot [harness]
+# Default harness is hermes. Change the argument to swap it.
+set -eu
+HARNESS=${1:-hermes}
+exec omarchy launch tui --app-id=org.omarchy.agent "$HARNESS" chat --cli

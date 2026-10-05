@@ -1,25 +1,36 @@
 # Toolbox1
 
-This toolbox is for Omarchy.
+Start here.
 
-A smart node already has Omarchy and a house agent in a harness. You bring the model. This folder is the toolbox.
+This toolbox is for Omarchy. A new smart node clones this repo, installs Obsidian, and opens this folder as a vault.
 
-Open this folder in Obsidian. Start at [Index.md](Index.md).
+Unbounded context is the Hop-80 toolchain. Three tools, in order: inject text into a foot, launch a bare foot, hop the current work to a new foot. Do not summarize.
 
-## What this page is
+## Install
 
-[Omarchy](Omarchy.md) is the system this toolbox is for.
+On Omarchy:
 
-A [smart node](https://github.com/Mesh-Node/mesh-node#smart-node) is a host running an agent. The public seed is [Mesh-Node/mesh-node](https://github.com/Mesh-Node/mesh-node). Read that for the packet. This folder is the toolbox, not the seed.
+```
+sudo pacman -S obsidian
+git clone https://github.com/Mesh-Node/Toolbox1.git
+```
 
-A [harness](harness.md) is the program that runs the agent. The house agent is the agent that belongs to this host. It is already running. This page does not install it.
+Open Obsidian. Open folder as vault. Pick the clone. Start at Index.md.
 
-A [tool](tool.md) is a small deterministic piece. Same input, same output. Confirm it in a real [workflow](workflow.md). Then promote it: a note in the vault, and a script the note names.
+If the clone fails because the repo is private, stop. Tell the operator. Do not invent a token.
 
-## Do not
+## Folders
 
-Do not write a script whose job is to tell an Omarchy user that they are on Omarchy.
+inbox — drafts and packets. Not tools.
 
-Do not promote a tool that has not been run.
+tools — one note per tool. The note names a script in scripts/.
 
-Do not copy another home.
+toolchains — tools in a fixed order. Hop-80 is the first chain.
+
+## Already true
+
+A smart node is a host running an agent. See https://github.com/Mesh-Node/mesh-node#smart-node
+
+The node already has Omarchy. It already has a house agent in a harness. You bring the model. This page does not install the harness.
+
+The harness command in these scripts is an argument. Default is hermes. Change the argument to swap the harness.

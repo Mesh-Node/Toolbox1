@@ -1,0 +1,37 @@
+#!/bin/sh
+# 80% hop. New foot continues the work. Does not summarize.
+# Usage: hop-80 "current work"
+# HARNESS defaults to hermes. HARNESS=other swaps it.
+set -eu
+HARNESS=${HARNESS:-hermes}
+goal=${1:-}
+[ -n "$goal" ] || { echo "need the current work as one argument" >&2; exit 2; }
+g=$(printf '%s' "$goal" | tr '[:upper:]' '[:lower:]')
+case "$g" in
+  continue|continue.|*"inflate from disk"*)
+    echo "refuse: slogan is not a goal" >&2
+    exit 6
+    ;;
+esac
+HOPS=${HERMES_HOPS:-$HOME/.hermes/hops}
+mkdir -p "$HOPS"
+umask 077
+q=$HOPS/receive-query.md
+{
+  printf '%s\n' \
+    "kind: hop" \
+    "goal: $goal" \
+    "edge: head" \
+    "in_scope:" \
+    "- this toolbox" \
+    "out_of_scope:" \
+    "- secrets" \
+    "trim:" \
+    "$goal" \
+    "" \
+    "Continue this work. Do not ask for the old chat. Files stay on disk."
+} > "$q"
+chmod 600 "$q"
+setsid -f omarchy launch tui --app-id=org.omarchy.agent \
+  "$HARNESS" chat --cli --query-file "$q" >/dev/null 2>&1
+echo "PASS hop-80 $q"

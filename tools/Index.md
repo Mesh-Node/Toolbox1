@@ -1,5 +1,9 @@
 # Tools
 
-Promoted tools only. Empty until a real run survives [[workflow]].
+One note per tool. The note names the script.
 
-A promoted note links its script. The script is in `scripts/`.
+- [[inject-foot]] — `scripts/inject-foot`
+- [[bare-foot]] — `scripts/bare-foot`
+- [[hop-80]] — `scripts/hop-80`
+
+These three are the Hop-80 toolchain. See [[toolchains/hop-80]].

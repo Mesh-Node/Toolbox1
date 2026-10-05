@@ -1,7 +1,11 @@
 # Scripts
 
-A promoted tool names a script in this folder.
+Linked from tool notes.
 
-Nothing is promoted yet. Do not add a script that tells an Omarchy user they are on Omarchy.
+| Script | Note |
+| --- | --- |
+| bare-foot | tools/bare-foot.md |
+| inject-foot | tools/inject-foot.md |
+| hop-80 | tools/hop-80.md |
 
-See the workflow note in the vault root.
+Order is toolchains/hop-80.md
