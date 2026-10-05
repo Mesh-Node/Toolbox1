@@ -1,0 +1,31 @@
+#!/bin/sh
+# Check two facts. Write nothing. Install nothing.
+set -eu
+
+fail=0
+ID=""
+if [ -r /etc/os-release ]; then
+  # shellcheck disable=SC1091
+  . /etc/os-release
+fi
+
+if [ "${ID:-}" = "omarchy" ] || command -v omarchy-version >/dev/null 2>&1; then
+  echo "PASS omarchy"
+else
+  echo "FAIL omarchy"
+  fail=1
+fi
+
+if command -v hermes >/dev/null 2>&1; then
+  echo "PASS harness"
+else
+  echo "FAIL harness"
+  fail=1
+fi
+
+if [ "$fail" -ne 0 ]; then
+  echo "STOP FAIL"
+  exit 1
+fi
+echo "STOP PASS"
+exit 0
