@@ -1,36 +1,23 @@
 # Toolbox1
 
-Start here.
+A starter Hermes toolbox for Omarchy. hop-80 is the worked example. At 80% of the session window, a fresh foot continues the live task. That handoff is the pattern for a tool and a toolchain.
 
-This toolbox is for Omarchy. A new smart node clones this repo, installs Obsidian, and opens this folder as a vault.
-
-Unbounded context is the Hop-80 toolchain. Three tools, in order: inject text into a foot, launch a bare foot, hop the current work to a new foot. Do not summarize.
-
-## Install
-
-On Omarchy:
+## Download
 
 ```
-sudo pacman -S obsidian
 git clone https://github.com/Mesh-Node/Toolbox1.git
 ```
 
-Open Obsidian. Open folder as vault. Pick the clone. Start at Index.md.
+Or use the Code button on this page and download the ZIP. Unzip it.
 
 If the clone fails because the repo is private, stop. Tell the operator. Do not invent a token.
 
-## Folders
+## Open in Obsidian
 
-inbox — drafts and packets. Not tools.
+1. Open Obsidian.
+2. Choose Open folder as vault.
+3. Select the `vault` folder inside `Toolbox1`.
 
-tools — one note per tool. The note names a script in scripts/.
+## Then
 
-toolchains — tools in a fixed order. Hop-80 is the first chain.
-
-## Already true
-
-A smart node is a host running an agent. See https://github.com/Mesh-Node/mesh-node#smart-node
-
-The node already has Omarchy. It already has a house agent in a harness. You bring the model. This page does not install the harness.
-
-The harness command in these scripts is an argument. Default is hermes. Change the argument to swap the harness.
+Read `SETUP.txt` beside that vault. Compression stays off. The hop chain is the vault note `hop-80`. The scripts are in `scripts/`.

@@ -1,0 +1,11 @@
+toolbox1
+
+SETUP.txt  compression stays off. Read this first.
+vault/     open this in Obsidian, after the checks in SETUP.txt
+scripts/   hop-80
+
+The live chain is detect, then packet-build, then one new foot.
+The live fire is hop-detect. The watcher is a manual probe.
+The hop hook is the step after the checks.
+
+  scripts/hop-detect.py --dry-run

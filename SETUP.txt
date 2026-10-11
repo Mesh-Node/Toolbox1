@@ -1,0 +1,45 @@
+# Harness setup
+
+Read this before the vault. The checks below finish the host. The hop hook comes after those checks.
+
+## Compaction
+
+Compaction stays off. If it is on, Hermes summarizes and this chain never runs.
+
+```
+hermes config get compression.enabled
+```
+
+The line must be `false`. If it is `true`, stop. Tell the operator. Do not turn compression on and call it a hop.
+
+## Chat window
+
+The hop line is `int(window * 0.8)`. Not a hardcoded 400000.
+
+grok-4.7 is 500000 on the xAI card at `~/.hermes/cache/endpoint_model_metadata.json`. That line is 400000. 256000 is only the last resort when the card has no row.
+
+A floor at or under 65536 is the small-model minimum. hop-detect ignores it when the model name contains grok. A real 65536 model still uses line 52428.
+
+## Hook
+
+After the checks, Hermes calls hop-detect once at the end of a finished turn. Not the manual probe.
+
+```
+hooks:
+  post_llm_call:
+    - command: /absolute/path/to/Toolbox1/scripts/hop-detect.py
+      timeout: 20
+```
+
+Allowlist that command. `scripts/hop-watch.sh` is the probe. It does not open a foot.
+
+## Order
+
+1. This host already has Omarchy and a house agent. This page does not install the harness.
+2. `hermes config get compression.enabled` is false.
+3. Open vault/ in Obsidian. Read hop-80.
+4. Install the hook above. The sender is `scripts/hop-send.sh`. It needs Hyprland and one foot. It closes one address, never a class.
+
+## This folder holds
+
+SETUP.txt, START.txt, scripts/, and vault/. Credentials, session stores, and model weights stay on the logged-in host. DENY.txt names the files that stay outside.
